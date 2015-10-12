@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<head>
+  <title>Invoicing application</title>
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <meta name="description" content="Application used to create commercial invoices">
+  <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+
+</head>
+<body ng:app="jqanim" ng:controller="appController" >
+  <div id="css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  </div> 
+<div class="container" width="800px" id="invoice" >
+  <table class="table">
+    <tr>
+      <td align="center" style="background-color:#357EBD;color:#FFF" colspan="2">
+        COMMERCIAL INVOICE
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h4>Invoice number: <input type="text" id="invoice_number" ng-model="invoice.invoice_number" /></h4>
+        <h4>Invoice date: &#160; &#160; &#160; <input type="text" id="invoice_date" ng-model="invoice.invoice_date" /></h4>
+      </td>
+      <td align="right">
+        <input type='file' id="imgInp" />
+        <img id="company_logo" src="images/logo.gif" alt="your image" width="300" />
+        <br/>
+        <div class="noPrint" ng-hide="printMode">
+        </div>
+      </td>
+    </tr>
+  </table>
+  <table class="table">
+    <tr>
+      <td>
+        <div class="infos">
+          <div><strong><input type="text" ng-model="invoice.customer_info.name"/></strong></div>
+          <div><input type="url" ng-model="invoice.customer_info.web"/></div>
+          <div><input type="text" ng-model="invoice.customer_info.address"/></div>
+          <div><input type="text" ng-model="invoice.customer_info.city"/></div>
+          <div><input type="text" ng-model="invoice.customer_info.country"/></div>
+        </div>
+      </td>
+      <td align="right">
+        <div class="align-right">
+          <div><strong><input type="text" ng-model="invoice.company_info.name"/></strong></div>
+          <div><input type="url" ng-model="invoice.company_info.web"/></div>
+          <div><input type="text" ng-model="invoice.company_info.address"/></div>
+          <div><input type="text" ng-model="invoice.company_info.city"/></div>
+          <div><input type="text" ng-model="invoice.company_info.country"/></div>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <table class="table table-striped" align="center" >
+      <tr>
+          <th></th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Cost</th>
+          <th style="text-align:right;">Total</th>
+          
+      </tr>
+      <tr ng:repeat="item in invoice.items" style="display: none" jq:animate="dropdown;250">
+          <td><a href ng-hide="printMode" ng-click="removeItem(item)" class="btn btn-danger">[X]</a></td>
+          <td><input ng:model="item.description" placeholder="Description"></td>
+          <td><input ng:model="item.qty" value="1" size="4" ng:required ng:validate="integer" placeholder="qty"></td>
+          <td><input ng:model="item.cost" value="0.00" ng:required ng:validate="number" size="6" placeholder="cost"></td>
+          <td align="right">{{item.cost * item.qty | currency:"&#8364;"}}</td>
+          
+      </tr>
+      <tr ng-hide="printMode">
+          <td colspan="5"><a class="btn btn-primary" href ng:click="addItem()" >Add Item</a></td>
+      </tr>
+      <tr>
+          <td colspan="4" align="right">
+            Sub Total
+          </td>
+          <td align="right">
+            {{invoice_sub_total() | currency:"&#8364;"}}
+          </td>
+      </tr>
+      <tr>
+          <td colspan="4" align="right">
+            Tax(%): <input ng:model="invoice.tax" ng:validate="number" style="width:43px">
+          </td>
+          <td align="right">
+            {{calculate_tax() | currency:"&#8364;"}}
+          </td>
+      </tr>
+      <tr>
+          <td colspan="4" align="right">
+            Grand Total:
+          </td>
+          <td align="right">
+            {{calculate_grand_total() | currency:"&#8364;"}}
+          </td>
+      </tr>
+  </table>
+  <div class="noPrint">
+    <a href="#" class="btn btn-primary" ng-show="printMode" ng-click="printInfo()">Print</a>
+	<a href="#" class="btn btn-primary" ng-click="clearLocalStorage()">Reset</a>
+    <a href="#" class="btn btn-primary" ng-hide="printMode" ng-click="printMode = true;">Turn On Print Mode</a>
+    <a href="#" class="btn btn-primary" ng-show="printMode" ng-click="printMode = false;">Turn Off Print Mode</a>
+  </div>
+</div>
+
+<div ng-hide="printMode" class="copy noPrint">
+  <a href="http://github.com">2015 - Evis Barbullushi</a>
+  <span class="registered">&#169; Microsoft</span>
+</div>
+</body>
+</html>

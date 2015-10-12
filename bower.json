@@ -1,0 +1,35 @@
+{
+  "name": "maven-angularjs",
+  "version": "0.0.1",
+  "authors": [
+    "evisb don7exc@gmail.com"
+  ],
+  "description": "Angular / Maven prototype project",
+  "main": "src/main/webapp/index.html",
+  "keywords": [
+    "java",
+    "maven",
+    "angularjs",
+    "nodejs",
+    "bower"
+  ],
+  "license": "Apache 2.0",
+  "homepage": "https://github.com/evisb",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/main/webapp/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-animate": "1.3.0-rc.3",
+    "angular-loader": "1.3.0-rc.3",
+    "angular-mocks": "1.3.0-rc.3",
+    "angular-route": "1.3.0-rc.3",
+    "angular": "1.3.0-rc.3",
+    "bootstrap": "~3.2.0"
+  }
+}
