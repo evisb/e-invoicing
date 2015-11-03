@@ -4,8 +4,8 @@ function appController($scope) {
 
     var sample_invoice = {
         tax: 21.00,
-        invoice_number: 3151308719,
-		invoice_date: "07-October-2014",
+        invoice_number: 15130871,
+		invoice_date: "02-November-2015",
         customer_info: {
             name: "Mr. John Doe",
             web: "http://www.jdoe-cust.com",
@@ -14,8 +14,8 @@ function appController($scope) {
             country: "United States"
         },
         company_info: {
-            name: "X-men n.v./SA",
-            web: "http://www.xmen-comp.net",
+            name: "Comp NV/SA",
+            web: "http://www.compx-demo.com",
             address: "Marktstraat 195",
             city: "1000, Brussels",
             country: "Belgium"
@@ -24,6 +24,11 @@ function appController($scope) {
             qty: 10,
             description: 'Mouse pad',
             cost: 9.95
+        },
+        {
+            qty: 1,
+            description: 'Computer screen',
+            cost: 100.00
         }]
     };
 
